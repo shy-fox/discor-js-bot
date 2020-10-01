@@ -687,16 +687,32 @@ Satan.on("message", async msg => {
 
             var owner = msg.guild.roles.cache.find(r => r.id === roles.owner).members.random();
 
+            if (promote_user.id === members.satan) {
+                msg.channel.send("", {
+                    embed: {
+                        color: satan_.roles.highest.color,
+                        author: {
+                            name: satan_.nickname,
+                            iconURL: satan_.user.avatarURL()
+                        },
+                        description: "Even though you tried promoting me, I can't accept it!"
+                    }
+                });
+
+                break;
+            }
+
             if (promote_user.id === promoter.id) {
                 if ((promote_user.id === members.alice && promoter.id === members.shiromi) || (promote_user.id === members.shiromi && promoter.id === members.alice)) {
                     msg.channel.send("", {
                         embed: {
                             color: 7419530,
                             author: {
+                                name: satan_.nickname,
                                 iconURL: satan_.user.avatarURL()
-                            }
-                        },
-                        description: `${promoter.id === members.shiromi ? "Shiromi" : "Alice"}, why do you want to promote your sister?`
+                            },
+                            description: `${promoter.id === members.shiromi ? "Shiromi" : "Alice"}, why do you want to promote your sister?`
+                        }
                     });
 
                     break;
@@ -782,12 +798,29 @@ Satan.on("message", async msg => {
 
             var user_tag = demote_user.user.tag;
 
+            if (demote_user.id === members.satan) {
+                msg.channel.send("", {
+                    embed: {
+                        color: demote_user.roles.highest.color,
+                        author: {
+                            name: satan_.nickname,
+                            iconURL: satan_.user.avatarURL()
+                        },
+                        title: "Warning",
+                        description: "You dare to demote me...!"
+                    }
+                });
+
+                break;
+            }
+
             if (demote_user.id === demoter.id) {
                 if ((demote_user.id === members.alice && demoter.id === members.shiromi) || (demote_user.id === members.shiromi && demoter.id === members.alice)) {
                     msg.channel.send("", {
                         embed: {
                             color: 7419530,
                             author: {
+                                name: satan_.nickname,
                                 iconURL: satan_.user.avatarURL()
                             }
                         },
@@ -847,6 +880,11 @@ Satan.on("message", async msg => {
                 }
             });
             
+            break;
+
+        case commands.game:
+            msg.channel.send("Sorry, this command is currently under construction.");
+
             break;
 
         default:
