@@ -61,7 +61,19 @@ Satan.on("message", async msg => {
     con.query(logging, (err, res) => {
         if (err) throw err;
         console.log("Logged successfully.");
-    })
+    });
+
+    if ((msg.content.includes("<@!442222220383748107>") || msg.content.includes("<@!698211374467383317>")) && !msg.content.startsWith(prefix)) {
+        msg.channel.send("How dare you ping one of my two daughters.");
+        return;
+    }
+
+    if (msg.content.toLowerCase().includes('god')) {
+        msg.delete().then(msg => {
+            msg.reply("you dare to mention this name in me or my daughters presence!?");
+        });
+        return;
+    }
 
     if (msg.channel.id === categories.hell.txtChannels.gate && msg.guild.members.cache.find(u => u.id === msg.author.id).roles.cache.find(r => r.id === roles.gatekeeper)) {
         if (msg.content.startsWith("allow")) {
@@ -106,7 +118,7 @@ Satan.on("message", async msg => {
 
     if ((msg.content.includes("@everyone") || msg.content === ";=;") && !(msg.author.id === members.alice || msg.author.id === members.shiromi)) {
         msg.delete().then(msg => {
-            msg.channel.send("How dare you!")
+            msg.reply("how dare you!")
         })
     }
 
@@ -680,6 +692,8 @@ Satan.on("message", async msg => {
             break;
         case commands.promote:
 
+            if (msg.content.includes("@everyone")) return;
+
             var rs = msg.guild.roles.cache.sort((a, b) => a.position - b.position);
 
             var promote_user = msg.mentions.members.first();
@@ -786,6 +800,8 @@ Satan.on("message", async msg => {
             break;
 
         case commands.demote:
+
+            if (msg.content.includes("@everyone")) return;
 
             var rs = msg.guild.roles.cache.sort((a, b) => a.position - b.position);
             
