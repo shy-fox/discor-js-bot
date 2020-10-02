@@ -68,7 +68,7 @@ Satan.on("message", async msg => {
         return;
     }
 
-    if (msg.content.toLowerCase().includes('god')) {
+    if (msg.content.toLowerCase().includes('god') && msg.guild.id !== "732591108302962768" && !(msg.author.id === members.shiromi || msg.author.id === members.alice)) {
         msg.delete().then(msg => {
             msg.reply("you dare to mention this name in me or my daughters presence!?");
         });
@@ -82,7 +82,7 @@ Satan.on("message", async msg => {
     
             let author = msg.guild.roles.cache.find(r => r.id === roles.gatekeeper).members.random();
     
-            member.send("", {
+            msg.mentions.members.first().send("", {
                 embed: {
                     author: {
                         name: author.nickname,
